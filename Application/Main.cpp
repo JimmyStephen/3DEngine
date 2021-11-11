@@ -46,6 +46,7 @@ int main(int argc, char** argv)
 		}
 		SDL_PumpEvents();
 		glClearColor(0.85f, 0.85f, 0.85f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT);
 		glBegin(GL_TRIANGLES);
 		glColor3f(1.0f, 0.0f, 0.0f);
 		glVertex2f(-0.5f, -0.5f);
@@ -54,7 +55,6 @@ int main(int argc, char** argv)
 		glColor3f(0.0f, 0.0f, 1.0f);
 		glVertex2f(0.5f, -0.5f);
 		glEnd();
-		glClear(GL_COLOR_BUFFER_BIT);
 		SDL_GL_SwapWindow(window);
 	}
 	return 0;
