@@ -50,11 +50,11 @@ namespace nc
 		return true;
 	}
 
-	Vector2 Texture::GetSize() const
+	glm::vec3 Texture::GetSize() const
 	{
 		SDL_Point point;
 		SDL_QueryTexture(texture, nullptr, nullptr, &point.x, &point.y);
 
-		return Vector2{ point.x, point.y };
+		return glm::vec3{ point.x, point.y, 0};
 	}
 }

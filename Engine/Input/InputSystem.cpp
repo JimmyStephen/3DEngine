@@ -26,7 +26,7 @@ namespace nc
 		prevMouseButtonState = mouseButtonState;
 		int x, y;
 		Uint32 buttons = SDL_GetMouseState(&x, &y);
-		mousePosition = nc::Vector2{ x,y };
+		mousePosition = glm::vec3{ x, y, 0};
 		mouseButtonState[0] = buttons & SDL_BUTTON_LMASK;
 		mouseButtonState[1] = buttons & SDL_BUTTON_MMASK;
 		mouseButtonState[2] = buttons & SDL_BUTTON_RMASK;

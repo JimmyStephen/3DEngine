@@ -14,14 +14,11 @@ namespace nc
 
 		std::for_each(systems.begin(), systems.end(), [](auto& system) {system->Startup(); });
 		REGISTER_CLASS(Actor);
-		REGISTER_CLASS(SpriteComponent);
-		REGISTER_CLASS(SpriteAnimationComponent);
 
 		//maybe delete
 		REGISTER_CLASS(PhysicsComponent);
 
 		REGISTER_CLASS(AudioComponent);
-		REGISTER_CLASS(TextComponent);
 	}
 	void Engine::Shutdown()
 	{
