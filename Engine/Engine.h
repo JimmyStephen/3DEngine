@@ -10,6 +10,8 @@
 #include "Component/GraphicsComponent.h"
 #include "Component/PhysicsComponent.h"
 #include "Component/AudioComponent.h"
+#include "Component/CameraComponent.h"
+#include "Component/MeshComponent.h"
 
 //math
 #include "Math/MathTypes.h"
@@ -20,7 +22,8 @@
 //graphics
 #include "Graphics/Renderer.h"
 #include "Graphics/Texture.h"
-#include "Graphics/ParticleSystem.h"
+#include "Graphics/VertexBuffer.h"
+#include "Graphics/VertexIndexBuffer.h"
 
 //framework
 #include "Framework/System.h"

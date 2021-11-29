@@ -9,16 +9,15 @@ namespace nc
 		systems.push_back(std::make_unique<EventSystem>());
 		systems.push_back(std::make_unique<AudioSystem>());
 		systems.push_back(std::make_unique<ResourceSystem>());
-		systems.push_back(std::make_unique<ParticleSystem>());
+		//systems.push_back(std::make_unique<ParticleSystem>());
 		systems.push_back(std::make_unique<InputSystem>());
 
 		std::for_each(systems.begin(), systems.end(), [](auto& system) {system->Startup(); });
 		REGISTER_CLASS(Actor);
-
-		//maybe delete
 		REGISTER_CLASS(PhysicsComponent);
-
 		REGISTER_CLASS(AudioComponent);
+		REGISTER_CLASS(CameraComponent);
+		REGISTER_CLASS(MeshComponent);
 	}
 	void Engine::Shutdown()
 	{
