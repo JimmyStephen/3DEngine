@@ -11,7 +11,7 @@ namespace nc
 	public:
 		Program();
 		~Program();
-		bool Load(const std::string& name, void* data) override;
+		bool Load(const std::string& filename, void* data) override;
 		void AddShader(const std::shared_ptr<Shader>& shader);
 		void Link();
 		void Use();

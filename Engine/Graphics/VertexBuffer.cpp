@@ -2,23 +2,45 @@
 
 namespace nc
 {
+	VertexBuffer::VertexBuffer()
+	{
+		glGenVertexArrays(1, &vao);
+		glBindVertexArray(vao);
+	}
+
 	VertexBuffer::~VertexBuffer()
 	{
-		//<if vao is not 0 then glDeleteVertexArrays>
-		if (vao != 0) glDeleteVertexArrays;
-		//<if vbo is not 0 then glDeleteBuffers>
-		if (vbo != 0) glDeleteBuffers;
+		if (vao) glDeleteVertexArrays(1, &vao);
+		if (vbo) glDeleteBuffers(1, &vbo);
+		if (ibo) glDeleteBuffers(1, &ibo);
+	}
+
+	void VertexBuffer::CreateIndexBuffer(GLenum indexType, GLsizei indexCount, void* data)
+	{
+		this->indexType = indexType;
+		this->indexCount = indexCount;
+		glGenBuffers(1, &ibo);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
+		size_t indexSize = (indexType == GL_UNSIGNED_SHORT) ? sizeof(GLushort) : sizeof(GLuint);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, indexCount * indexSize, data, GL_STATIC_DRAW);
 	}
 
 	bool VertexBuffer::Load(const std::string& name, void* null)
 	{
-		//Im confused by the use of the paramiters
-		//<glGenVertexArrays with vao>
-		glGenVertexArrays(1, &vao);
-		//<glBindVertexArray vao>
-		glBindVertexArray(vao);
-
 		return true;
+	}
+
+	void VertexBuffer::Draw(GLenum primitiveType)
+	{
+		glBindVertexArray(vao);
+		if (ibo)
+		{
+			glDrawElements(primitiveType, indexCount, indexType, 0);
+		}
+		else if (vbo)
+		{
+			glDrawArrays(primitiveType, 0, vertexCount);
+		}
 	}
 
 	void VertexBuffer::CreateVertexBuffer(GLsizei size, GLsizei vertexCount, void* data)
@@ -37,13 +59,5 @@ namespace nc
 	{
 		glEnableVertexAttribArray(index);
 		glVertexAttribPointer(index, size, GL_FLOAT, GL_FALSE, stride, (void*)(offset));
-	}
-
-	void VertexBuffer::Draw(GLenum primitiveType)
-	{
-		//<glBindVertexArray vao>
-		glBindVertexArray(vao);
-		//<glDrawArrays use vertex count>
-		glDrawArrays(primitiveType, 0, vertexCount);
 	}
 }
